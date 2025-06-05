@@ -1,0 +1,74 @@
+/* Contenedor principal de la barra de navegación */
+.navbar-container {
+  position: fixed; /* Fija la barra en la parte superior de la ventana, incluso al hacer scroll */
+  top: 0; /* Se posiciona desde el borde superior de la ventana */
+  left: 0; /* Se posiciona desde el borde izquierdo de la ventana */
+  width: 100vw; /* Ocupa el 100% del ancho visible del navegador */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos en pantalla */
+  display: flex; /* Usa flexbox para alinear elementos hijos en una línea */
+  justify-content: space-between; /* Espacio entre el logo (izquierda) y los enlaces (derecha) */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 2px 2px; /* Espaciado interno (arriba/abajo y a los lados) */
+  background-color: #1e1e2f; /* Color de fondo azul oscuro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil debajo de la barra para dar profundidad */
+}
+
+/* Estilos para el logo en la parte izquierda de la barra */
+.navbar-left {
+  margin: auto;
+  background-color: transparent;
+  padding: 0px 0px
+}
+
+.navbar-left .logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  clip-path: circle(45% at center); /* Recorta el centro circular del logo */
+}
+
+
+/* Contenedor de los enlaces en la parte derecha de la barra */
+.navbar-right {
+  margin: auto;
+  display: flex; /* Usa flexbox para alinear los enlaces en línea */
+  align-items: center; /* Centra verticalmente los enlaces */
+  gap: 20px; /* Espacio horizontal entre los enlaces */
+  padding: 0px 0px;
+  background-color: transparent;
+}
+
+/* Estilo base para los enlaces del navbar */
+.navbar-right a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #ffffff; /* Color del texto blanco */
+  font-weight: 500; /* Peso de fuente medio */
+  padding: 6px 10px; /* Espacio interno en cada enlace */
+  border-radius: 4px; /* Bordes ligeramente redondeados */
+  background-color: transparent; /* Asegura que no tengan fondo blanco */
+  transition: background-color 0.3s ease; /* Transición suave al hacer hover */
+}
+
+/* Estilo cuando el mouse pasa por encima de un enlace */
+.navbar-right a:hover {
+  background-color: #00bcd4; /* Cambia el fondo a un celeste */
+  color: #1e1e2f; /* Cambia el color del texto a azul oscuro para contraste */
+}
+
+/* Estilo del botón principal (ej: botón de "Reserva") */
+.primary-button {
+  padding: 8px 16px; /* Espaciado interno más amplio que los enlaces */
+  background-color: #00bcd4; /* Color celeste de fondo */
+  border: none; /* Sin borde */
+  border-radius: 6px; /* Bordes redondeados más marcados */
+  color: #fff; /* Texto blanco */
+  font-weight: 600; /* Texto más grueso */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+}
+
+/* Efecto hover para el botón principal */
+.primary-button:hover {
+  background-color: #0097a7; /* Oscurece el celeste cuando se pasa el mouse por encima */
+}

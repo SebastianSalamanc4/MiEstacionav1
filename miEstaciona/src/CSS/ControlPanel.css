@@ -1,0 +1,22 @@
+.controlPanel {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .controlPanel h1 {
+    font-size: 4rem;
+    color: rgb(0, 0, 0);
+    margin-bottom: 1rem;
+  }
+  
+  
+  /* Puedes usar esta clase para un texto de cuerpo más pequeño */
+  .controlPanel .body-text {
+    font-size: 1rem; /* letra más chica */
+    color: #424040; /* blanco suave */
+  }
+  
