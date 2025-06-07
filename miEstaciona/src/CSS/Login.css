@@ -1,22 +1,141 @@
-.login {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .login h1 {
-    font-size: 4rem;
-    color: rgb(0, 0, 0);
-    margin-bottom: 1rem;
-  }
-  
-  
-  /* Puedes usar esta clase para un texto de cuerpo más pequeño */
-  .login .body-text {
-    font-size: 1rem; /* letra más chica */
-    color: #424040; /* blanco suave */
-  }
-  
+/* ✅ RESETEO GLOBAL CORRECTO */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh;           /* ← en vez de min-height */
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.login-right {
+  flex: 1;
+  padding: 2rem 2rem;       /* ← reducido desde 4rem */
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  overflow-y: auto;         /* ← permite scroll interno solo si es necesario */
+}
+
+.login-left {
+  flex: 2;
+  max-width: 50vw;
+  overflow: hidden;
+}
+
+.login-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ✅ Cita sobre la imagen */
+.login-quote {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: #3a343a;
+  max-width: 80%;
+}
+
+.login-quote p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.login-right h2 {
+  font-size: 3.0rem;
+  margin-bottom: 0.01rem;
+}
+
+.login-right p {
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+form input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #000000;
+}
+
+form a {
+  font-size: 0.9rem;
+  color: #009688;
+  text-decoration: none;
+}
+
+.remember {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #ff0000;
+}
+
+.btn-login {
+  background-color: #009688;
+  color: rgb(255, 255, 255);
+  padding: 0.8rem;
+  border: none;
+  width: 100%;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.divider span {
+  background: rgb(255, 255, 255);
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: #000000;
+  z-index: 0;
+}
+
+.btn-google {
+  background: #eee7e7;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 2rem;
+}

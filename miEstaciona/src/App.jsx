@@ -10,7 +10,7 @@ import UserProfile from "./pages/UserProfile";
 function App() {
   return (
     <Router>
-      <NavBar />
+
       <Routes>
         <Route path="/ControlPanel" element={<ControlPanel />} />
         <Route path="/" element={<Home />} />

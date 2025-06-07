@@ -1,22 +1,88 @@
 .home {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .home h1 {
-    font-size: 4rem;
-    color: rgb(0, 0, 0);
-    margin-bottom: 1rem;
-  }
-  
-  
-  /* Puedes usar esta clase para un texto de cuerpo más pequeño */
-  .home .body-text {
-    font-size: 1rem; /* letra más chica */
-    color: #424040; /* blanco suave */
-  }
-  
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url('../assets/FondoParking1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+
+.contenedor-principal {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;            /* Aumentado el padding vertical */
+  width: 90%;
+  max-width: 1100px;
+  min-height: 500px;             /* ← Agregado: asegura altura mínima */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+
+.contenido-home {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: nowrap;
+}
+
+
+
+
+.texto-home {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.texto-home h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.texto-home p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.boton-home {
+  background-color: #009688;
+  color: rgb(255, 252, 252);
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.imagen-home {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 50%;
+}
+
+.imagen-home img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
+}
