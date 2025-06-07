@@ -9,55 +9,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2.5rem;
 }
-
 
 .contenedor-principal {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  padding: 2rem 2.5rem;            /* Aumentado el padding vertical */
+  padding: 3rem 3.5rem;
   width: 90%;
-  max-width: 1100px;
-  min-height: 500px;             /* ← Agregado: asegura altura mínima */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  max-width: 1300px;
+  min-height: 650px;
+  box-shadow: 0 8px 30px rgba(100, 100, 100, 0.15);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
 }
-
 
 .contenido-home {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: nowrap;
 }
-
-
-
 
 .texto-home {
   flex: 1;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 600px;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .texto-home h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
   color: #333;
 }
 
 .texto-home p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin-bottom: 1.5rem;
   color: #555;
 }
@@ -66,23 +61,24 @@
   background-color: #009688;
   color: rgb(255, 252, 252);
   border: none;
-  padding: 0.8rem 1.6rem;
+  padding: 1rem 2rem;
   border-radius: 8px;
+  font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
 .imagen-home {
-  flex: 1;
+  flex: 4;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 50%;
+  max-width: 100%;
 }
 
 .imagen-home img {
   width: 100%;
-  max-width: 450px;
+  max-width: 650px;
   height: auto;
   object-fit: contain;
 }

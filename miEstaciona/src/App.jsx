@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Statistics from "./pages/Statistics";
 import UserProfile from "./pages/UserProfile";
 
+
 function App() {
   return (
     <Router>
@@ -15,9 +16,10 @@ function App() {
         <Route path="/ControlPanel" element={<ControlPanel />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/Register" element={<Register />} />
         <Route path="/Statistics" element={<Statistics />} />
         <Route path="/UserProfile" element={<UserProfile />} />
+
       </Routes>
     </Router>
   );

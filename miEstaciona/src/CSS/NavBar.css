@@ -1,41 +1,48 @@
-.navbar-home {
+/* ✅ CONFIGURACIÓN SOLO PARA EL HOME */
+
+.home .navbar-home {
   display: flex;
-  justify-content: flex-start; /* Cambiado de flex-end a flex-start */
-  align-items: center;         /* Opcional: para alinear verticalmente */
-  margin-bottom: 2rem;
-  padding-left: 2rem;          /* Opcional: un poco de espacio desde el borde izquierdo */
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0.1rem;
+  padding-left: 0.5rem;
+  font-size: 1.3rem; /* ← tamaño de texto general en la navbar */
 }
 
-
-.nav-links {
+.home .nav-links {
   list-style: none;
   display: flex;
-  gap: 2.0rem;
+  gap: 3.0rem;
   padding: 0;
   margin: 0;
 }
 
-.nav-links li a,
-.nav-links li span {
+.home .nav-links li a,
+.home .nav-links li span {
   text-decoration: none;
   color: #000000;
   font-weight: 550;
 }
 
-.btn-navbar {
+.home .btn-navbar {
   background-color: #009688;
   color: white;
   padding: 0.4rem 0.9rem;
-  border-radius: 6px;
+  border-radius: 13px;
   font-weight: bold;
 }
 
-.logout-button {
+.home .logout-button {
   background: none;
   border: none;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
-  display:center;
-  padding:  100;
+  display: center;
+  padding: 100;
 }
+
+
+/*FIN DISEÑO NAVBAR SOLO EL HOME*/
+
+
