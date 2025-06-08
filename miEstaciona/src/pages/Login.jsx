@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../CSS/Login.css';
-import ImgLateral from '../assets/ImgLateralLogin.png'; // Asegúrate que esté bien escrito y exista
+import ImgLateral from '../assets/ImgLateralLogin.png';
+import Navbar from "./NavBar.jsx"; // Asegúrate que esté bien escrito y exista
 
 const Login = () => {
   return (
@@ -16,6 +17,7 @@ const Login = () => {
 
       {/* Lado derecho con formulario */}
       <div className="login-right">
+        <Navbar /> 
         <h2>Welcome back to MiEstaciona</h2>
         <p>Accede a la plataforma para administrar tu estacionamiento.</p>
 

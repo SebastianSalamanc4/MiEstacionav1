@@ -1,0 +1,36 @@
+.parking-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.parking-slot {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: center;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.parking-slot.ocupado {
+  background-color: #92ddd7; /* amarillo si está ocupado */
+}
+
+.car-icon {
+  width: 40px;
+  margin-top: 0.4rem;
+}
+
+.slot-id {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+/* Fondo solo en el área del contenido (sin cubrir el sidebar) */
+

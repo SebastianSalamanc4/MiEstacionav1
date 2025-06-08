@@ -63,6 +63,7 @@ html, body {
 .login-right h2 {
   font-size: 3.0rem;
   margin-bottom: 0.01rem;
+  top: 100px;
 }
 
 .login-right p {

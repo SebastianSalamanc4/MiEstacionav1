@@ -1,0 +1,14 @@
+.registro-autos-page {
+  color: #222;
+  padding: 2rem;
+}
+
+.registro-placeholder {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #e0f7f5;
+  border: 1px dashed #009688;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}

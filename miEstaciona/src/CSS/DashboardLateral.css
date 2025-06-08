@@ -1,0 +1,132 @@
+/* Contenedor general del layout */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar moderno estilo Donezo */
+.sidebar {
+  width: 240px;
+  background-color: #f9fafb;
+  color: #2d2d2d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Logo o título superior */
+.sidebar h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #00836a;
+  margin-bottom: 2rem;
+}
+
+/* Secciones tipo 'MENU' y 'GENERAL' */
+.sidebar section {
+  margin-bottom: 2rem;
+}
+
+.sidebar section h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* Navegación estilo lista vertical */
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Links */
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar nav a:hover {
+  background-color: #e0f2f1;
+  color: #007d67;
+}
+
+/* Íconos en los enlaces (si usas react-icons o SVGs) */
+.sidebar nav a svg {
+  font-size: 1.1rem;
+}
+
+/* Zona de contenido principal */
+.dashboard-content {
+  flex: 1;
+  background-color: #ffffff;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+/* Contenido principal */
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  color: #222;
+
+  /* Fondo patrón 3D armónico */
+  --s: 200px;
+  --c1: #faf2f2;    /* verde oscuro azulado */
+  --c2: #e8faf7;    /* verde musgo suave */
+  --c3: #d1f3f0;    /* gris verdoso medio */
+
+  background: repeating-conic-gradient(
+        from 30deg,
+        #0000 0 120deg,
+        var(--c3) 0 180deg
+      )
+      calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+    repeating-conic-gradient(
+      from 30deg,
+      var(--c1) 0 60deg,
+      var(--c2) 0 120deg,
+      var(--c3) 0 180deg
+    );
+  background-size: var(--s) calc(var(--s) * 0.577);
+}
+.icon-nav {
+  margin-right: 10px;
+  font-size: 1.3rem;
+  vertical-align: middle;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #f0f0f0;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #1a7266;
+}
+
+.nav-link.active {
+  background-color: #ffffff;
+  color: #009688;
+  font-weight: bold;
+}
+
