@@ -87,15 +87,6 @@ if (isHome) {
                 ControlPanel
               </NavLink>
             </li>
-
-            <li>
-              <NavLink
-                to="/Statistics"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Estadística
-              </NavLink>
-            </li>
             <li>
             <Link to="/dashboard" className="btn-navbar">
               Dashboard

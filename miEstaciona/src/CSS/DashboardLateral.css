@@ -113,7 +113,7 @@
 .nav-link {
   display: flex;
   align-items: center;
-  color: #f0f0f0;
+  color: #ff0000;
   text-decoration: none;
   padding: 0.7rem 1rem;
   border-radius: 8px;
@@ -125,8 +125,13 @@
 }
 
 .nav-link.active {
-  background-color: #ffffff;
+  background-color: #c3f8ee;
   color: #009688;
   font-weight: bold;
+}
+.nav-bottom {
+  margin-top: auto;
+  padding-top: 30rem;
+
 }
 

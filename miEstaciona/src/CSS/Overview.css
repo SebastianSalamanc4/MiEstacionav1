@@ -1,10 +1,13 @@
 .parking-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 20px;
+
+  width: 1300px;         /* 👈 tamaño fijo que mantiene el tamaño constante */
+  max-width: 90vw;      /* opcional, para que no desborde en pantallas pequeñas */
 }
 
 .parking-slot {
@@ -33,4 +36,23 @@
   font-size: 0.9rem;
 }
 /* Fondo solo en el área del contenido (sin cubrir el sidebar) */
+.overview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.status-summary {
+  background-color: #92ddd7;
+  color: #000000;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  max-width: 900px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+}
 
