@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "../../CSS/DashboardLateral.css";
+import { MdArrowBack } from "react-icons/md";
 
 import {
   MdLocalParking,
@@ -17,8 +18,12 @@ const DashboardLateral = () => {
     <div className="dashboard-layout">
       <aside className="sidebar">
         <div>
-          <h2>MiEstaciona</h2>
+          <NavLink to="/" className="nav-link back-button">
+            <MdArrowBack className="icon-nav" />
+              Back
+            </NavLink>
 
+          <h2>MiEstaciona</h2>
           <nav className="nav-section">
             <NavLink to="/dashboard/overview" className="nav-link">
               <MdLocalParking className="icon-nav" />

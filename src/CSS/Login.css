@@ -23,6 +23,7 @@ html, body {
 .login-right {
   flex: 1;
   padding: 2rem 2rem;       /* ← reducido desde 4rem */
+  padding-top: 6rem; /* ⬅️ agrega espacio arriba */
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;

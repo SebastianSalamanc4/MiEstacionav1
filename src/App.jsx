@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ControlPanel from "./pages/ControlPanel";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import NavBar from "./pages/NavBar";
 import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import DashboardLateral from "./pages/dashboard/DashboardLateral";
@@ -13,7 +11,7 @@ import Graficos from "./pages/dashboard/Graficos";
 import { Cuadratura } from "./pages/dashboard/Cuadratura";
 import { GestionUsuarios } from "./pages/dashboard/GestionUsuarios";
 import { Profile } from "./pages/dashboard/Profile";
-import { Configuracion } from "./pages/dashboard/configuracion";
+import { Configuracion } from "./pages/dashboard/Configuracion";
 
 
 
@@ -26,7 +24,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/UserProfile" element={<UserProfile />} />
-        <Route path="/ControlPanel" element={<ControlPanel />} />
 
 
         {/* Ruta del Dashboard */}

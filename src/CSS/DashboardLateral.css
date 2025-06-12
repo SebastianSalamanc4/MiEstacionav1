@@ -134,4 +134,14 @@
   padding-top: 30rem;
 
 }
+.back-button {
+  margin-bottom: 1.5rem;
+  background-color: #e0f2f1;
+  color: #007d67;
+  font-weight: 500;
+}
 
+.back-button:hover {
+  background-color: #c3f8ee;
+  color: #009688;
+}

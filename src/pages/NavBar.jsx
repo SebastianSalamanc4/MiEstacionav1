@@ -16,7 +16,7 @@ const NavBar = () => {
   // lógica para saber en qué página estás
   const path = location.pathname;
   const isHome = path === '/';
-  const isLoginOrRegister = path === "/login" || path === "/Register" || path === '/ControlPanel' || path === '/Statistics';
+  const isLoginOrRegister = path === "/login" || path === "/Register" || path === '/Statistics';
 
   // clase condicional según la ruta
 let navbarClass = 'navbar'; 
@@ -74,17 +74,6 @@ if (isHome) {
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Register
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/ControlPanel"
-                className={({ isActive }) =>
-                  isActive ? 'btn-navbar active' : 'btn-navbar'
-                }
-              >
-                ControlPanel
               </NavLink>
             </li>
             <li>
