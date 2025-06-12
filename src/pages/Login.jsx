@@ -1,39 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext"; // Ajusta la ruta al archivo AuthContext
 import '../CSS/Login.css';
 import ImgLateral from '../assets/ImgLateralLogin.png';
-import Navbar from "./NavBar.jsx"; // Asegúrate que esté bien escrito y exista
+import Navbar from "./NavBar.jsx";
 
 const Login = () => {
+  const [correo, setCorreo] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Obtienes login desde el contexto
+  const { login } = useContext(AuthContext);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correo, contraseña }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Login exitoso:', data);
+        // Llamas a login del contexto para guardar el estado global
+        login(data.id, data.tipo_usuario);  // <-- aquí pasas el id ry el tipo de usuario ecibido del backend
+        navigate('/dashboard');
+      } else {
+        setError(data.error || 'Error en el login');
+      }
+    } catch (err) {
+      setError('Error de conexión al servidor');
+    }
+  };
+
   return (
     <div className="login-container">
-      {/* Lado izquierdo con imagen y cita */}
       <div className="login-left">
         <img src={ImgLateral} alt="Testimonio" />
-        <div className="login-quote">
-          {/* <p>“Estaciona con seguridad, administra con confianza.”</p>*/}
-        </div>
+        <div className="login-quote"></div>
       </div>
 
-      {/* Lado derecho con formulario */}
       <div className="login-right">
-        <Navbar /> 
+        <Navbar />
         <h2>Welcome back to MiEstaciona</h2>
         <p>Accede a la plataforma para administrar tu estacionamiento.</p>
 
-        <form>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={contraseña}
+            onChange={(e) => setContraseña(e.target.value)}
+            required
+          />
           <a href="#">Forgot password?</a>
 
-          <div className="remember">
-          </div>
+          {error && <p style={{color: 'red'}}>{error}</p>}
 
-          <button className="btn-login">Log in</button>
+          <button className="btn-login" type="submit">Log in</button>
 
           <div className="divider"><span>OR</span></div>
 
-          <button className="btn-google">Continua con google</button>
+          <button className="btn-google" type="button">Continua con google</button>
         </form>
 
         <p className="register-link">No tienes una cuenta? <a href="#">Sign up</a></p>

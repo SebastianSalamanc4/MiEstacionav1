@@ -33,13 +33,22 @@
 }
 
 .navbar-home .logout-button {
-  background: none;
-  border: none;
-  color: #ffffff;
+  background-color: #ffe5e5;      /* rojo claro */
+  color: #c0392b;                 /* rojo oscuro */
+  border: 1px solid #c0392b;
+  border-radius: 13px;
   font-weight: bold;
   cursor: pointer;
-  display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  align-self: center;            /* asegura alineación vertical */
+  margin-left: auto;             /* lo empuja a la derecha si se desea */
+}
+
+/* Hover del botón de cerrar sesión */
+.navbar-home .logout-button:hover {
+  background-color: #c0392b;
+  color: white;
 }
 .navbar-login-register {
   display: flex;
@@ -101,13 +110,22 @@
 
 /* Estilo del botón de cerrar sesión */
 .navbar-login-register .logout-button {
-  background: none;
-  border: none;
-  color: #000000;
+  background-color: #ffe5e5;      /* rojo claro */
+  color: #c0392b;                 /* rojo oscuro */
+  border: 1px solid #c0392b;
+  border-radius: 13px;
   font-weight: bold;
   cursor: pointer;
-  display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  align-self: center;            /* asegura alineación vertical */
+  margin-left: auto;             /* lo empuja a la derecha si se desea */
+}
+
+/* Hover del botón de cerrar sesión */
+.navbar-login-register .logout-button:hover {
+  background-color: #c0392b;
+  color: white;
 }
 
 

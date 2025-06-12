@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
+import VistaUsuario from "./pages/VistaUsuario";
 import DashboardLateral from "./pages/dashboard/DashboardLateral";
 import Overview from "./pages/dashboard/Overview";
 import RegistroAutos from "./pages/dashboard/RegistroAutos";
@@ -24,7 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/UserProfile" element={<UserProfile />} />
-
+        <Route path="/VistaUsuario" element={<VistaUsuario />} />
 
         {/* Ruta del Dashboard */}
         <Route path="/dashboard" element={<DashboardLateral />}>

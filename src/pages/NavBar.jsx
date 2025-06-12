@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 
 const NavBar = () => {
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,77 +13,84 @@ const NavBar = () => {
     navigate("/");
   };
 
-  // lógica para saber en qué página estás
+  // Ruta actual
   const path = location.pathname;
   const isHome = path === '/';
   const isLoginOrRegister = path === "/login" || path === "/Register" || path === '/Statistics';
 
-  // clase condicional según la ruta
-let navbarClass = 'navbar'; 
-let navLinksClass = 'nav-links';
-let btnClass = 'btn-navbar';
-let logoutClass = 'logout-button';
+  // Estilos condicionales
+  let navbarClass = 'navbar';
+  let navLinksClass = 'nav-links';
+  let btnClass = 'btn-navbar';
+  let logoutClass = 'logout-button';
 
-if (isHome) {
-  navbarClass += ' navbar-home';
-  navLinksClass += ' navbar-home';
-  btnClass += ' navbar-home';
-  logoutClass += ' navbar-home';
-}  if (isLoginOrRegister) {
-  navbarClass += ' navbar-login-register';
-  navLinksClass += ' navbar-login-register';
-  btnClass += ' navbar-login-register';
-  logoutClass += ' navbar-login-register';
-} else {
-  
-}
+  if (isHome) {
+    navbarClass += ' navbar-home';
+    navLinksClass += ' navbar-home';
+    btnClass += ' navbar-home';
+    logoutClass += ' navbar-home';
+  } else if (isLoginOrRegister) {
+    navbarClass += ' navbar-login-register';
+    navLinksClass += ' navbar-login-register';
+    btnClass += ' navbar-login-register';
+    logoutClass += ' navbar-login-register';
+  }
 
+  // Tipo de usuario actual
+  const tipoUsuario = user?.tipo_usuario;
 
   return (
-        <nav className={navbarClass}>
-          <ul className="nav-links">
+    <nav className={navbarClass}>
+      <ul className={navLinksClass}>
+        <li>
+          <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Home
+          </NavLink>
+        </li>
+
+        {!isLoggedIn ? (
+          <>
             <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Home
+              <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
+                Iniciar Sesión
               </NavLink>
             </li>
-
-            {!isLoggedIn ? (
-              <li>
-                <NavLink
-                  to="/login"
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                >
-                  Iniciar Sesión
-                </NavLink>
-              </li>
-            ) : (
-              <li>
-                <button onClick={handleLogout} className="logout-button">
-                  Cerrar Sesión
-                </button>
-              </li>
-            )}
-
             <li>
-              <NavLink
-                to="/Register"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
+              <NavLink to="/Register" className={({ isActive }) => (isActive ? 'active' : '')}>
                 Register
               </NavLink>
             </li>
-            <li>
-            <Link to="/dashboard" className="btn-navbar">
-              Dashboard
-            </Link>
-          </li>
+          </>
+        ) : (
+          <>
+            {/* Vista Usuario */}
+            {tipoUsuario === 'usuario' && (
+              <li>
+                <NavLink to="/VistaUsuario" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Vista Usuario
+                </NavLink>
+              </li>
+            )}
 
-          </ul>
-        </nav>
+            {/* Dashboard solo para admin o trabajador */}
+            {(tipoUsuario === 'admin' || tipoUsuario === 'trabajador') && (
+              <li>
+                <Link to="/dashboard" className={btnClass}>
+                  Dashboard
+                </Link>
+              </li>
+            )}
+
+            {/* Cerrar Sesión */}
+            <li>
+              <button onClick={handleLogout} className={logoutClass}>
+                Cerrar Sesión
+              </button>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
   );
 };
 

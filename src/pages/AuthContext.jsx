@@ -1,38 +1,40 @@
 import React, { createContext, useState, useEffect } from "react";
 
-// 🧠 Creamos un contexto llamado AuthContext que se usará para compartir datos de autenticación
+// Contexto
 export const AuthContext = createContext();
 
-// 🔒 Componente que provee el contexto de autenticación a toda la aplicación
 export const AuthProvider = ({ children }) => {
-  // 📦 Estado que indica si el usuario está logeado
-  // Se inicializa comprobando si existe 'usuarioId' en el localStorage
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("usuarioId"));
+  // Estado de sesión
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null); // usuario completo
 
-  // ✅ Función para iniciar sesión
-  // Guarda el ID del usuario en localStorage y actualiza el estado
-  const login = (id) => {
-    localStorage.setItem("usuarioId", id); // guarda el ID en el navegador
-    setIsLoggedIn(true); // actualiza el estado a "logeado"
+  // Función login: guarda ID y tipo_usuario
+  const login = (id, tipo_usuario) => {
+    const userData = { id, tipo_usuario };
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+    setIsLoggedIn(true);
   };
 
-  // 🔓 Función para cerrar sesión
-  // Elimina el ID del usuario del localStorage y actualiza el estado
+  // Función logout
   const logout = () => {
-    localStorage.removeItem("usuarioId"); // elimina el ID del navegador
-    setIsLoggedIn(false); // actualiza el estado a "no logeado"
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsLoggedIn(false);
   };
 
-  // 🔁 useEffect se ejecuta al montar el componente
-  // Vuelve a verificar si el usuario está logeado al recargar la página
+  // Al cargar la app, verificar si hay sesión guardada
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("usuarioId"));
-  }, []); // solo se ejecuta una vez
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-  // 🎁 Devolvemos el proveedor del contexto
-  // Esto envuelve a los componentes hijos y les da acceso a `isLoggedIn`, `login` y `logout`
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
