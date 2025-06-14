@@ -1,47 +1,4 @@
-.parking-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 20px;
 
-  width: 1300px;         /* 👈 tamaño fijo que mantiene el tamaño constante */
-  max-width: 90vw;      /* opcional, para que no desborde en pantallas pequeñas */
-}
-
-.parking-slot {
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  padding: 0.5rem;
-  text-align: center;
-  height: 90px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.parking-slot.ocupado {
-  background-color: #92ddd7; /* amarillo si está ocupado */
-}
-
-.car-icon {
-  width: 40px;
-  margin-top: 0.4rem;
-}
-
-.slot-id {
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-/* Fondo solo en el área del contenido (sin cubrir el sidebar) */
-.overview-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
 
 .status-summary {
   background-color: #92ddd7;
@@ -55,4 +12,79 @@
   font-size: 1rem;
   font-family: 'Segoe UI', sans-serif;
 }
+.parking-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 1300px;
+  max-width: 90vw;
+}
 
+.parking-slot {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 0.3rem;
+  height: auto; /* 👈 permitirá que crezca si el contenido lo necesita */
+  min-height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.parking-slot.ocupado {
+  background-color: #92ddd7;
+}
+
+.slot-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 100%;
+}
+
+.slot-id {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.car-icon {
+  width: 30px;
+  margin: 0.2rem 0;
+}
+
+.slot-info {
+  font-size: 0.75rem;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.2rem;
+  max-width: 100%;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.slot-patente,
+.slot-conductor {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.overview-container {
+  display: flex;
+  flex-direction: column; /* mantiene elementos en columna */
+  align-items: center;    /* centra horizontalmente */
+  justify-content: center; /* centra verticalmente */
+  gap: 1.5rem;
+}

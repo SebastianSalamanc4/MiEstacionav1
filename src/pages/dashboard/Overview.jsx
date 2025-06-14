@@ -9,13 +9,11 @@ const Overview = () => {
     fetch("http://localhost:5000/historial")
       .then(res => res.json())
       .then(data => {
-        // Inicializa los slots A01–A12 como vacíos
         const allSlots = Array.from({ length: 12 }, (_, i) => {
           const num = String(i + 1).padStart(2, '0');
           return { id: `A${num}`, ocupado: false, vehiculo: null };
         });
 
-        // Encuentra vehículos activos y los asigna a su posición
         const activos = data.filter(v => v.salida === null);
 
         const actualizados = allSlots.map(slot => {
@@ -53,16 +51,18 @@ const Overview = () => {
             key={slot.id}
             className={`parking-slot ${slot.ocupado ? "ocupado" : "libre"}`}
           >
-            <span className="slot-id">{slot.id}</span>
-            {slot.ocupado && (
-              <>
-                <img src={carIcon} alt="car" className="car-icon" />
-                <div className="slot-info">
-                  <span className="slot-patente">{slot.vehiculo.patente}</span>
-                  <span className="slot-conductor">{slot.vehiculo.conductor}</span>
-                </div>
-              </>
-            )}
+            <div className="slot-content">
+              <span className="slot-id">{slot.id}</span>
+              {slot.ocupado && (
+                <>
+                  <img src={carIcon} alt="car" className="car-icon" />
+                  <div className="slot-info">
+                    <span className="slot-patente">{slot.vehiculo.patente}</span>
+                    <span className="slot-conductor">{slot.vehiculo.conductor}</span>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         ))}
       </div>
