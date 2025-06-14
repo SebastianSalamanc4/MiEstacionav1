@@ -1,31 +1,22 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "../../CSS/DashboardLateral.css";
-import { MdArrowBack } from "react-icons/md";
-
-import {
-  MdLocalParking,
-  MdCarRental,
-  MdGroups,
-  MdBarChart,
-  MdAttachMoney,
-  MdManageAccounts,
-  MdPerson,
-  MdSettings,
-} from "react-icons/md";
+import { MdArrowBack, MdLocalParking, MdCarRental, MdGroups, MdBarChart, MdAttachMoney, MdManageAccounts, MdPerson, MdSettings } from "react-icons/md";
 
 const DashboardLateral = () => {
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
-        <div>
+        {/* PARTE SUPERIOR */}
+        <div className="sidebar-top">
           <NavLink to="/" className="nav-link back-button">
             <MdArrowBack className="icon-nav" />
-              Back
-            </NavLink>
+            Back
+          </NavLink>
 
           <h2>MiEstaciona</h2>
+
           <nav className="nav-section">
-            <NavLink to="/dashboard/overview" className="nav-link">
+            <NavLink to="/dashboard/overview" className="nav-link" activeClassName="active">
               <MdLocalParking className="icon-nav" />
               Estacionamiento
             </NavLink>
@@ -46,23 +37,23 @@ const DashboardLateral = () => {
               Cuadratura
             </NavLink>
           </nav>
-
-          {/* SECCIÓN INFERIOR */}
-          <nav className="nav-bottom">
-            <NavLink to="/dashboard/GestionUsuarios" className="nav-link">
-              <MdManageAccounts className="icon-nav" />
-              Gestión Usuario
-            </NavLink>
-            <NavLink to="/dashboard/Profile" className="nav-link">
-              <MdPerson className="icon-nav" />
-              Perfil
-            </NavLink>
-            <NavLink to="/dashboard/Configuracion" className="nav-link">
-              <MdSettings className="icon-nav" />
-              Configuración
-            </NavLink>
-          </nav>
         </div>
+
+        {/* PARTE INFERIOR - pegado abajo */}
+        <nav className="nav-bottom">
+          <NavLink to="/dashboard/GestionUsuarios" className="nav-link">
+            <MdManageAccounts className="icon-nav" />
+            Gestión Usuario
+          </NavLink>
+          <NavLink to="/dashboard/Profile" className="nav-link">
+            <MdPerson className="icon-nav" />
+            Perfil
+          </NavLink>
+          <NavLink to="/dashboard/Configuracion" className="nav-link">
+            <MdSettings className="icon-nav" />
+            Configuración
+          </NavLink>
+        </nav>
       </aside>
 
       <main className="dashboard-content">

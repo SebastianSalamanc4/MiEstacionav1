@@ -83,10 +83,11 @@ const NavBar = () => {
 
             {/* Cerrar Sesión */}
             <li>
-              <button onClick={handleLogout} className={logoutClass}>
+              <button onClick={handleLogout} className="buttoncerrarsesion">
                 Cerrar Sesión
               </button>
             </li>
+
           </>
         )}
       </ul>
