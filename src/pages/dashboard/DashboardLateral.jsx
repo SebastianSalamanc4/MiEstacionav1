@@ -2,17 +2,7 @@ import { NavLink, Outlet, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";      // ajusta la ruta
 import "../../CSS/DashboardLateral.css";
-import {
-  MdArrowBack,
-  MdLocalParking,
-  MdCarRental,
-  MdGroups,
-  MdBarChart,
-  MdAttachMoney,
-  MdManageAccounts,
-  MdPerson,
-  MdSettings,
-} from "react-icons/md";
+import { MdArrowBack, MdLocalParking, MdCarRental, MdGroups, MdBarChart, MdAttachMoney, MdManageAccounts, MdPerson, MdSettings } from "react-icons/md";
 
 const DashboardLateral = () => {
   const { user } = useContext(AuthContext);
@@ -27,8 +17,8 @@ const DashboardLateral = () => {
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
-        <div>
-          {/* botón volver */}
+        {/* PARTE SUPERIOR */}
+        <div className="sidebar-top">
           <NavLink to="/" className="nav-link back-button">
             <MdArrowBack className="icon-nav" />
             Back
@@ -36,8 +26,9 @@ const DashboardLateral = () => {
 
           {/* sección superior */}
           <h2>MiEstaciona</h2>
+
           <nav className="nav-section">
-            <NavLink to="/dashboard/overview" className="nav-link">
+            <NavLink to="/dashboard/overview" className="nav-link" activeClassName="active">
               <MdLocalParking className="icon-nav" />
               Estacionamiento
             </NavLink>
@@ -65,28 +56,23 @@ const DashboardLateral = () => {
               Cuadratura
             </NavLink>
           </nav>
-
-          {/* sección inferior */}
-          <nav className="nav-bottom">
-            <NavLink to="/dashboard/GestionUsuarios" className="nav-link">
-              <MdManageAccounts className="icon-nav" />
-              Gestión Usuario
-            </NavLink>
-
-            <NavLink to="/dashboard/Profile" className="nav-link">
-              <MdPerson className="icon-nav" />
-              Perfil
-            </NavLink>
-
-            {/* Configuración: visible solo si NO es trabajador */}
-            {!esTrabajador && (
-              <NavLink to="/dashboard/Configuracion" className="nav-link">
-                <MdSettings className="icon-nav" />
-                Configuración
-              </NavLink>
-            )}
-          </nav>
         </div>
+
+        {/* PARTE INFERIOR - pegado abajo */}
+        <nav className="nav-bottom">
+          <NavLink to="/dashboard/GestionUsuarios" className="nav-link">
+            <MdManageAccounts className="icon-nav" />
+            Gestión Usuario
+          </NavLink>
+          <NavLink to="/dashboard/Profile" className="nav-link">
+            <MdPerson className="icon-nav" />
+            Perfil
+          </NavLink>
+          <NavLink to="/dashboard/Configuracion" className="nav-link">
+            <MdSettings className="icon-nav" />
+            Configuración
+          </NavLink>
+        </nav>
       </aside>
 
       <main className="dashboard-content">
