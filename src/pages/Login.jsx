@@ -79,7 +79,7 @@ const Login = () => {
           <button className="btn-google" type="button">Continua con google</button>
         </form>
 
-        <p className="register-link">No tienes una cuenta? <a href="#">Sign up</a></p>
+        <p className="register-link">No tienes una cuenta? <Link to="/register">Inicia sesión</Link></p>
       </div>
     </div>
   );

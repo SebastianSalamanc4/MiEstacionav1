@@ -56,7 +56,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/Register" className={({ isActive }) => (isActive ? 'active' : '')}>
+              <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
                 Register
               </NavLink>
             </li>
@@ -66,7 +66,7 @@ const NavBar = () => {
             {/* Vista Usuario */}
             {tipoUsuario === 'usuario' && (
               <li>
-                <NavLink to="/VistaUsuario" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <NavLink to="/vistaUsuario" className={({ isActive }) => (isActive ? 'active' : '')}>
                   Vista Usuario
                 </NavLink>
               </li>

@@ -23,9 +23,9 @@ function App() {
         {/* Rutas normales */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/UserProfile" element={<UserProfile />} />
-        <Route path="/VistaUsuario" element={<VistaUsuario />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/vistaUsuario" element={<VistaUsuario />} />
 
         {/* Ruta del Dashboard */}
         <Route path="/dashboard" element={<DashboardLateral />}>

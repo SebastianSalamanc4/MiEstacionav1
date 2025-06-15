@@ -10,7 +10,7 @@ const Register = () => {
     nombre: "",
     correo: "",
     contraseña: "",
-    tipo_usuario: "usuario", // valor por defecto
+    tipo_usuario: "trabajador", // valor por defecto
   });
 
   const [mensaje, setMensaje] = useState("");
