@@ -1,0 +1,233 @@
+/* ---------------------------------------------
+   GestionUsuarios.css
+   Estilos personalizados para el módulo
+   de gestión de usuarios / trabajadores
+   Autor: (tu nombre)
+----------------------------------------------*/
+
+/**************************************
+ * 1. Variables de color y helpers
+ **************************************/
+:root {
+  /* Colores de marca */
+  --gsn-primary: #005eb3;
+  --gsn-primary-light: #3c8cff;
+  --gsn-danger: #d9534f;
+  --gsn-gray-100: #f8f9fa;
+  --gsn-gray-200: #e9ecef;
+  --gsn-gray-400: #ced4da;
+  --gsn-gray-600: #6c757d;
+}
+
+/* Shadow suave y radios coherentes */
+.gsn-shadow-sm {
+  box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+/* Transiciones básicas */
+.gsn-transition {
+  transition: all 0.25s ease-in-out;
+}
+
+/**************************************
+ * 2. Layout general
+ **************************************/
+body {
+  background-color: var(--gsn-gray-100);
+}
+
+/* Contenedor principal */
+.gsn-gestion {
+  padding-block: 2rem;
+}
+
+/**************************************
+ * 3. Tarjetas
+ **************************************/
+.card.gsn-card {
+  border: none;
+  border-radius: 0.75rem;
+  background-color: #fff;
+}
+
+.card.gsn-card .card-title {
+  font-weight: 600;
+  color: var(--gsn-primary);
+}
+
+/**************************************
+ * 4. Formulario
+ **************************************/
+.gsn-form .form-control,
+.gsn-form .form-select {
+  border-radius: 0.5rem;
+  border-color: var(--gsn-gray-400);
+}
+
+.gsn-form .form-control:focus,
+.gsn-form .form-select:focus {
+  border-color: var(--gsn-primary-light);
+  box-shadow: 0 0 0 0.25rem rgba(0, 94, 179, 0.25);
+}
+
+/* Botones */
+.btn-primary {
+  background-color: var(--gsn-primary);
+  border-color: var(--gsn-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--gsn-primary-light);
+  border-color: var(--gsn-primary-light);
+}
+
+.btn-secondary {
+  background-color: var(--gsn-gray-600);
+  border-color: var(--gsn-gray-600);
+}
+
+/**************************************
+ * 5. Buscador
+ **************************************/
+.gsn-search-select {
+  min-width: 140px;
+}
+
+.gsn-search-input::placeholder {
+  color: var(--gsn-gray-600);
+  opacity: 0.8;
+}
+
+/**************************************
+ * 6. Tabla
+ **************************************/
+.table.gsn-table {
+  --bs-table-bg: #fff;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table.gsn-table thead th {
+  background-color: var(--gsn-primary);
+  color: #fff;
+  border-top: none;
+  vertical-align: middle;
+}
+
+.table.gsn-table tbody tr {
+  vertical-align: middle;
+  cursor: default;
+}
+
+.table.gsn-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.table.gsn-table tbody td {
+  border-top: 1px solid var(--gsn-gray-200);
+}
+
+/* Icon Buttons */
+.btn-link {
+  color: var(--gsn-primary);
+}
+
+.btn-link:hover {
+  color: var(--gsn-primary-light);
+  text-decoration: none;
+}
+
+.btn-link.text-danger {
+  color: var(--gsn-danger);
+}
+
+.btn-link.text-danger:hover {
+  color: #bd2130;
+}
+
+/**************************************
+ * 7. Animaciones sutiles
+ **************************************/
+@keyframes gsn-fade-in {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card.gsn-card {
+  animation: gsn-fade-in 0.4s ease-out;
+}
+
+/* --------------------------------
+ * Títulos grandes y más vistosos
+ * ------------------------------- */
+.card.gsn-card .card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: var(--gsn-primary);
+}
+
+/* -------------------------------
+ * Buscador más bonito y ordenado
+ * ------------------------------- */
+.gsn-buscador {
+  background-color: var(--gsn-gray-100);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+.gsn-buscador .form-select,
+.gsn-buscador .form-control {
+  border-radius: 0.5rem;
+  border-color: var(--gsn-gray-400);
+}
+
+.gsn-buscador .form-control:focus,
+.gsn-buscador .form-select:focus {
+  border-color: var(--gsn-primary-light);
+  box-shadow: 0 0 0 0.2rem rgba(0, 94, 179, 0.2);
+}
+
+/**************************************
+ * 8. Responsive fine‑tuning
+ **************************************/
+@media (max-width: 575.98px) {
+  .gsn-search-select {
+    width: 100%;
+  }
+  .gsn-search-input {
+    margin-top: 0.5rem;
+  }
+}
+
+.gsn-pagination .btn {
+  padding: 0.25rem 0.6rem;
+}
+
+.gsn-page-dot {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--gsn-primary);
+  background: #fff;
+  color: var(--gsn-primary);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.gsn-page-dot:hover {
+  background: var(--gsn-primary-light);
+  color: #fff;
+}
+
+.gsn-page-dot.active {
+  background: var(--gsn-primary);
+  color: #fff;
+}
