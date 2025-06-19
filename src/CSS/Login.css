@@ -20,16 +20,16 @@ html, body {
   overflow: hidden;
 }
 
+/* Login.css – ajusta el padding SOLO cuando estés en .login-page */
 .login-right {
   flex: 1;
-  padding: 2rem 2rem;       /* ← reducido desde 4rem */
-  padding-top: 6rem; /* ⬅️ agrega espacio arriba */
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
   overflow-y: auto;         /* ← permite scroll interno solo si es necesario */
+  padding: 3rem 1rem;       /* ← reducido desde 4rem */
 }
 
 .login-left {

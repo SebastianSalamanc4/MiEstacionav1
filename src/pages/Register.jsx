@@ -10,7 +10,7 @@ const Register = () => {
     nombre: "",
     correo: "",
     contraseña: "",
-    tipo_usuario: "trabajador", // valor por defecto
+    tipo_usuario: "admin", // valor por defecto
   });
 
   const [mensaje, setMensaje] = useState("");
@@ -66,13 +66,14 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-container">
       <div className="login-left">
         <img src={ImgLateral} alt="Testimonio" />
       </div>
-
+      
       <div className="login-right">
-        <Navbar />
         <h2>Crea tu cuenta</h2>
         <p>
           Ingresa los datos para registrarte en MiEstaciona y administra tu
@@ -113,10 +114,11 @@ const Register = () => {
         {mensaje && <p className="mensaje-registro">{mensaje}</p>}
 
         <p className="register-link">
-          ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
+          ¿Ya tienes una cuenta? <Link to="/Login">Inicia sesión</Link>
         </p>
       </div>
     </div>
+    </>
   );
 };
 

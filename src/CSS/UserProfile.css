@@ -1,22 +1,61 @@
 .userProfile {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .userProfile h1 {
-    font-size: 4rem;
-    color: rgb(0, 0, 0);
-    margin-bottom: 1rem;
-  }
-  
-  
-  /* Puedes usar esta clase para un texto de cuerpo más pequeño */
-  .userProfile .body-text {
-    font-size: 1rem; /* letra más chica */
-    color: #424040; /* blanco suave */
-  }
-  
+  max-width: 540px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05);
+}
+
+.userProfile h2 {
+  margin-bottom: 1.5rem;
+  color: #005eb3;
+  font-weight: 700;
+  text-align: center;
+}
+
+.profile-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-form input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-save {
+  flex: 1;
+  background: #009688;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-logout {
+  flex: 1;
+  background: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mensaje {
+  margin-top: 1rem;
+  font-weight: 600;
+}

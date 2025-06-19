@@ -12,7 +12,7 @@ import Graficos from "./pages/dashboard/Graficos";
 import { Cuadratura } from "./pages/dashboard/Cuadratura";
 import { GestionUsuarios } from "./pages/dashboard/GestionUsuarios";
 import { Profile } from "./pages/dashboard/Profile";
-import { Configuracion } from "./pages/dashboard/Configuracion";
+import Configuracion from "./pages/dashboard/Configuracion";
 
 
 
@@ -22,15 +22,15 @@ function App() {
       <Routes>
         {/* Rutas normales */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/userProfile" element={<UserProfile />} />
-        <Route path="/vistaUsuario" element={<VistaUsuario />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/UserProfile" element={<UserProfile />} />
+        <Route path="/VistaUsuario" element={<VistaUsuario />} />
 
         {/* Ruta del Dashboard */}
         <Route path="/dashboard" element={<DashboardLateral />}>
           <Route index element={<Overview />} /> {/* Dashboard base */}
-          <Route path="overview" element={<Overview />} />
+          <Route path="Overview" element={<Overview />} />
           <Route path="/dashboard/RegistroAutos" element={<RegistroAutos />} />
           <Route path="/dashboard/UserAct" element={<UserAct />} />
           <Route path="/dashboard/Graficos" element={<Graficos/>} />

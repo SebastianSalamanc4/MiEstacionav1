@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react";
+// GestionUsuarios.jsx
+import React, { useEffect, useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../AuthContext";            // ajusta la ruta si es necesario
 import { Pencil, Trash2 } from "lucide-react";
 import "../../CSS/GestionUsuarios.css";
 
 const API = "http://localhost:5000";
+const PAGE_SIZE = 8;          // filas por página
 
 const GestionUsuarios = () => {
+  /* ----------- 🔒 Comprobación de rol ------------ */
+  const { user } = useContext(AuthContext);
+  if (user?.tipo_usuario !== "admin") {
+    return <Navigate to="/dashboard" replace />;
+  }
 
-  // Datos y formulario ----------------------------------------------------------------
+  /* ------------------- Estado ------------------- */
   const [usuarios, setUsuarios] = useState([]);
   const [form, setForm] = useState({
     nombre: "",
@@ -16,16 +25,21 @@ const GestionUsuarios = () => {
   });
   const [editingId, setEditingId] = useState(null);
 
-  // Buscador --------------------------------------------------------------------------
-  const [searchField, setSearchField] = useState("nombre");     // columna a buscar
-  const [searchValue, setSearchValue] = useState("");           // valor de búsqueda
+  /* Buscador */
+  const [searchField, setSearchField] = useState("nombre");
+  const [searchValue, setSearchValue] = useState("");
 
-  // Helpers REST ----------------------------------------------------------------------
+  /* Paginación */
+  const [currentPage, setCurrentPage] = useState(0);
+
+  /* -------------- Helpers REST -------------- */
   const fetchUsuarios = async () => {
     try {
       const res  = await fetch(`${API}/usuarios`);
       const data = await res.json();
-      setUsuarios(data);
+
+      /* ❗️Descartar usuarios admin para que nunca se muestren */
+      setUsuarios(data.filter(u => u.tipo_usuario !== "admin"));
     } catch {
       alert("Error al cargar usuarios.");
     }
@@ -35,7 +49,10 @@ const GestionUsuarios = () => {
     fetchUsuarios();
   }, []);
 
-  // Form CRUD -------------------------------------------------------------------------
+  /* Si cambian filtros/datos → reset page */
+  useEffect(() => setCurrentPage(0), [searchField, searchValue, usuarios]);
+
+  /* -------------- CRUD -------------- */
   const resetForm = () => {
     setForm({ nombre: "", correo: "", contraseña: "", tipo_usuario: "trabajador" });
     setEditingId(null);
@@ -80,40 +97,30 @@ const GestionUsuarios = () => {
     }
   };
 
-  // Filtrado según buscador -----------------------------------------------------------
-  const filteredUsuarios = usuarios.filter(u => {
-    if (searchField === "tipo_usuario") {
-      return searchValue ? u.tipo_usuario === searchValue : true;
-    }
-    return searchValue
-      ? u[searchField].toLowerCase().startsWith(searchValue.toLowerCase())
-      : true;
-  });
+  /* -------------- Filtrado + paginado -------------- */
+  const filteredUsuarios = usuarios
+    .filter(u => {
+      if (searchField === "tipo_usuario") {
+        return searchValue ? u.tipo_usuario === searchValue : true;
+      }
+      return searchValue
+        ? u[searchField].toLowerCase().startsWith(searchValue.toLowerCase())
+        : true;
+    });
 
-  // ‑‑‑ Encima de GestionUsuarios (o dentro del componente) ‑‑‑
-  const PAGE_SIZE = 8;              // 👉 cuántas filas quieres por “carrusel”
+  const pageCount    = Math.ceil(filteredUsuarios.length / PAGE_SIZE);
+  const sliceStart   = currentPage * PAGE_SIZE;
+  const pageUsuarios = filteredUsuarios.slice(sliceStart, sliceStart + PAGE_SIZE);
 
-  // ‑‑‑ Dentro de GestionUsuarios  ----------------------------------------------------
-  const [currentPage, setCurrentPage] = useState(0);           // 0‑based
+  const goPrev = () => setCurrentPage(p => Math.max(p - 1, 0));
+  const goNext = () => setCurrentPage(p => Math.min(p + 1, pageCount - 1));
+  const goPage = idx => setCurrentPage(idx);
 
-  // Cuando cambia el filtro o los datos, vuelve a la primera página
-  useEffect(() => setCurrentPage(0), [searchField, searchValue, usuarios]);
-
-  // --------------- Segmento de la página actual ------------
-  const pageCount      = Math.ceil(filteredUsuarios.length / PAGE_SIZE);
-  const sliceStart     = currentPage * PAGE_SIZE;
-  const pageUsuarios   = filteredUsuarios.slice(sliceStart, sliceStart + PAGE_SIZE);
-
-  const goPrev  = () => setCurrentPage(p => Math.max(p - 1, 0));
-  const goNext  = () => setCurrentPage(p => Math.min(p + 1, pageCount - 1));
-  const goPage  = idx => setCurrentPage(idx);
-
-
-  // UI --------------------------------------------------------------------------------
+  /* ------------------- UI ------------------- */
   return (
     <div className="container py-4">
       <div className="row g-4">
-        {/* -------------------------------- Formulario -------------------------------- */}
+        {/* Formulario */}
         <div className="col-12 col-xl-6">
           <div className="card shadow-sm">
             <div className="card-body">
@@ -155,14 +162,14 @@ const GestionUsuarios = () => {
                   name="tipo_usuario"
                   value={form.tipo_usuario}
                   onChange={handleChange}
-                  disabled={!editingId}                // deshabilitado en modo Crear
-                 >
-                  {editingId ? (                      // ──── Modo ACTUALIZAR ────
-                  <>
-                    <option value="trabajador">Trabajador</option>
-                    <option value="usuario">Usuario</option>
-                  </>
-                  ) : (                               // ──── Modo CREAR ────
+                  disabled={!editingId}
+                >
+                  {editingId ? (
+                    <>
+                      <option value="trabajador">Trabajador</option>
+                      <option value="usuario">Usuario</option>
+                    </>
+                  ) : (
                     <option value="trabajador">Trabajador</option>
                   )}
                 </select>
@@ -172,7 +179,11 @@ const GestionUsuarios = () => {
                     {editingId ? "Actualizar" : "Crear"}
                   </button>
                   {editingId && (
-                    <button type="button" className="btn btn-secondary flex-grow-1" onClick={resetForm}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary flex-grow-1"
+                      onClick={resetForm}
+                    >
                       Cancelar
                     </button>
                   )}
@@ -182,13 +193,13 @@ const GestionUsuarios = () => {
           </div>
         </div>
 
-        {/* -------------------------------- Tabla ------------------------------------- */}
+        {/* Tabla */}
         <div className="col-12 col-xl-6">
           <div className="card shadow-sm h-100">
             <div className="card-body d-flex flex-column">
               <h5 className="card-title">Usuarios / Trabajadores registrados</h5>
 
-              {/* ------- Buscador ------- */}
+              {/* Buscador */}
               <div className="row g-2 align-items-end mb-3">
                 <div className="col-auto">
                   <select
@@ -220,7 +231,7 @@ const GestionUsuarios = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder={`Buscar por ${searchField === "nombre" ? "nombre" : "correo"}`}
+                      placeholder={`Buscar por ${searchField}`}
                       value={searchValue}
                       onChange={e => setSearchValue(e.target.value)}
                     />
@@ -228,7 +239,7 @@ const GestionUsuarios = () => {
                 </div>
               </div>
 
-              {/* ------- Tabla ------- */}
+              {/* Tabla */}
               <div className="table-responsive flex-grow-1">
                 <table className="table table-sm align-middle">
                   <thead className="table-light">
@@ -246,10 +257,16 @@ const GestionUsuarios = () => {
                         <td>{u.correo}</td>
                         <td className="text-capitalize">{u.tipo_usuario}</td>
                         <td className="text-end">
-                          <button className="btn btn-link p-0 me-2" onClick={() => editarUsuario(u)}>
+                          <button
+                            className="btn btn-link p-0 me-2"
+                            onClick={() => editarUsuario(u)}
+                          >
                             <Pencil size={16} />
                           </button>
-                          <button className="btn btn-link text-danger p-0" onClick={() => eliminarUsuario(u.id)}>
+                          <button
+                            className="btn btn-link text-danger p-0"
+                            onClick={() => eliminarUsuario(u.id)}
+                          >
                             <Trash2 size={16} />
                           </button>
                         </td>
@@ -264,15 +281,18 @@ const GestionUsuarios = () => {
                     )}
                   </tbody>
                 </table>
-                {/* ------ Navegación (carrusel) ------ */}
+
+                {/* Paginación */}
                 {pageCount > 1 && (
                   <nav className="gsn-pagination mt-3 d-flex justify-content-center align-items-center gap-2">
-                    <button className="btn btn-sm btn-outline-primary"
-                    onClick={goPrev} disabled={currentPage === 0}>
+                    <button
+                      className="btn btn-sm btn-outline-primary"
+                      onClick={goPrev}
+                      disabled={currentPage === 0}
+                    >
                       ←
                     </button>
-                    
-                    {/* Dots / números */}
+
                     {Array.from({ length: pageCount }).map((_, idx) => (
                       <button
                         key={idx}
@@ -281,11 +301,15 @@ const GestionUsuarios = () => {
                       >
                         {idx + 1}
                       </button>
-                      ))}
-                      <button className="btn btn-sm btn-outline-primary"
-                      onClick={goNext} disabled={currentPage === pageCount - 1}>
-                        →
-                      </button>
+                    ))}
+
+                    <button
+                      className="btn btn-sm btn-outline-primary"
+                      onClick={goNext}
+                      disabled={currentPage === pageCount - 1}
+                    >
+                      →
+                    </button>
                   </nav>
                 )}
               </div>

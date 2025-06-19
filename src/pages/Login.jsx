@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./AuthContext"; // Ajusta la ruta al archivo AuthContext
-import '../CSS/Login.css';
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "./AuthContext"; // Ruta al archivo AuthContext
 import ImgLateral from '../assets/ImgLateralLogin.png';
+import '../CSS/Login.css';
 import Navbar from "./NavBar.jsx";
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
       if (response.ok) {
         console.log('Login exitoso:', data);
         // Llamas a login del contexto para guardar el estado global
-        login(data.id, data.tipo_usuario);  // <-- aquí pasas el id ry el tipo de usuario ecibido del backend
+        login(data.id, data.tipo_usuario);  // <-- aquí pasas el id, el tipo de usuario ecibido del backend
         navigate('/dashboard');
       } else {
         setError(data.error || 'Error en el login');
@@ -42,14 +42,14 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-container">
       <div className="login-left">
         <img src={ImgLateral} alt="Testimonio" />
         <div className="login-quote"></div>
       </div>
-
       <div className="login-right">
-        <Navbar />
         <h2>Welcome back to MiEstaciona</h2>
         <p>Accede a la plataforma para administrar tu estacionamiento.</p>
 
@@ -79,9 +79,10 @@ const Login = () => {
           <button className="btn-google" type="button">Continua con google</button>
         </form>
 
-        <p className="register-link">No tienes una cuenta? <Link to="/register">Inicia sesión</Link></p>
+        <p className="register-link">No tienes una cuenta? <Link to="/Register">Registrate</Link></p>
       </div>
     </div>
+    </>
   );
 };
 

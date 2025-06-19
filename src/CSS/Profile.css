@@ -1,0 +1,111 @@
+.profile-container {
+  max-width: 480px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  background: #fdfdfd;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+
+  /* Asegura altura relativa y scroll interno si es necesario */
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.profile-container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  color: #222;
+}
+
+.profile-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem; /* Reducido de 1.2rem */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.2rem; /* Antes: 0.4rem */
+  color: #444;
+}
+
+.form-group input {
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #00bfa5;
+  box-shadow: 0 0 0 3px rgba(0, 191, 165, 0.2);
+  outline: none;
+}
+
+.req {
+  color: crimson;
+  font-weight: bold;
+}
+
+.profile-msg {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  background-color: #eef;
+  color: #333;
+}
+
+.profile-loading {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.form-buttons button {
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-save {
+  background-color: #00bfa5;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #009e8e;
+}
+
+.btn-logout {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-logout:hover {
+  background-color: #d32f2f;
+}

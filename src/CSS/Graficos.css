@@ -1,0 +1,25 @@
+.graficos-container {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.grafico-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.grafico-box h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.carrusel-buttons button {
+  min-width: 120px;
+}

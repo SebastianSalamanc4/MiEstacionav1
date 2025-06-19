@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./App.jsx";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Importa tu proveedor de autenticación
 import { AuthProvider } from "./pages/AuthContext.jsx";
