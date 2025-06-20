@@ -16,7 +16,7 @@ const NavBar = () => {
   // Ruta actual
   const path = location.pathname;
   const isHome = path === '/';
-  const isLoginOrRegister = path === "/Login" || path === "/Register";
+  const isLoginOrRegister = path === "/Login" || path === "/Register" || path === "/VistaUsuario";
 
   // Estilos condicionales
   let navbarClass = 'navbar';
@@ -67,7 +67,7 @@ const NavBar = () => {
             {tipoUsuario === 'usuario' && (
               <li>
                 <NavLink to="/VistaUsuario" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Vista Usuario
+                  Conocenos mas 
                 </NavLink>
               </li>
             )}

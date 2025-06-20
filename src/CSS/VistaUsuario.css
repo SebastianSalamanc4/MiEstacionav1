@@ -1,15 +1,138 @@
-.userProfile {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+/* Aplica el fondo al cuerpo de la página */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0; /* Elimina el margen predeterminado del body */
+  padding: 0; /* Elimina el padding predeterminado del body */
+  background-image: url('src/assets/FondoParking1.png'); /* Ruta de la imagen */
+  background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* La imagen se queda fija al hacer scroll */
+  height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+}
+
+/* Estilo general del contenedor */
+.container {
+  padding: 40px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  border-radius: 50px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Títulos principales */
+h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  color: #4CAF50; /* Color verde para los títulos */
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 40px;
+  color: #000000; /* Color gris para el texto */
+}
+
+/* Grid para los recuadros */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+/* Estilos generales para las tarjetas */
+.card {
+  background-color: #ff6f61; /* Color de fondo más cálido */
+  padding: 30px;
+  border-radius: 15px; /* Bordes redondeados más suaves */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra más suave y sutil */
+  cursor: pointer;
+  box-sizing: border-box;
+  word-wrap: break-word; /* Evita que el texto largo se desborde */
+  overflow-wrap: break-word; /* Permite que las palabras largas se ajusten */
+}
+
+/* Efecto al pasar el ratón (hover) */
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el ratón */
+  background-color: #92ddd7; /* Color verde claro en hover */
+}
+
+/* Iconos */
+.card .icon {
+  font-size: 3.5em;
+  color: #ffffff; /* Color blanco para los iconos */
+  margin-bottom: 20px;
+}
+
+/* Títulos de las tarjetas */
+.card h2 {
+  font-size: 1.8em;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #000000;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* Títulos más elegantes */
+  word-wrap: break-word; /* Asegura que el título no se corte */
+}
+
+/* Descripciones dentro de las tarjetas */
+.card p {
+  font-size: 1em;
+  margin-top: 10px;
+  line-height: 1.6;
+  color: #333; /* Color de texto más suave y legible */
+  text-align: center;
+  word-wrap: break-word; /* Evita el corte de palabras */
+}
+
+/* Eliminamos span fijo para que no rompa el layout */
+.card:nth-child(1),
+.card:nth-child(2),
+.card:nth-child(3),
+.card:nth-child(4),
+.card:nth-child(5) {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
   }
-  .userProfile h1 {
-    font-size: 4rem;
-    color: rgb(0, 0, 0);
-    margin-bottom: 1rem;
+
+  .card {
+    padding: 20px;
+    border-radius: 10px; /* Bordes más redondeados para pantallas pequeñas */
   }
-  
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+  .card .icon {
+    font-size: 2.5em;
+  }
+
+  .card h2 {
+    font-size: 1.5em;
+  }
+
+  .card p {
+    font-size: 0.9em;
+  }
+}
