@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import "../CSS/VistaUsuario.css";
-import Navbar from './Navbar';  // Importa la navbar aquí
+import Navbar from "./NavBar.jsx";
 
 const VistaUsuario = () => {
   const [capacidadTotal, setCapacidadTotal] = useState(0);

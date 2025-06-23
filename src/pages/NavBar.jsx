@@ -29,7 +29,7 @@ const NavBar = () => {
     navLinksClass += ' navbar-home';
     btnClass += ' navbar-home';
     logoutClass += ' navbar-home';
-  } else if (isLoginOrRegister) {
+  } else{
     navbarClass += ' navbar-login-register';
     navLinksClass += ' navbar-login-register';
     btnClass += ' navbar-login-register';
@@ -80,7 +80,14 @@ const NavBar = () => {
                 </Link>
               </li>
             )}
-
+            {/* Vista de perfil solo para usuario */}
+            {(tipoUsuario === 'usuario') && (
+              <li>
+                <Link to="/UserProfile" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Perfil
+                </Link>
+              </li>
+            )}
             {/* Cerrar Sesión */}
             <li>
               <button onClick={handleLogout} className="buttoncerrarsesion">

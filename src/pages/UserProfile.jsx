@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../CSS/UserProfile.css";
+import Navbar from "./NavBar.jsx";
 
 const API = "http://localhost:5000";
 
@@ -73,6 +74,7 @@ const UserProfile = () => {
   if (loading) return <p className="userProfile">Cargando…</p>;
 
   return (
+    <div><Navbar /> {/* Aquí agregas la navbar al inicio */}
     <div className="userProfile">
       <h2>Mi perfil</h2>
 
@@ -133,6 +135,7 @@ const UserProfile = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };
