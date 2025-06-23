@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../../CSS/Profile.css";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 
 export const Profile = () => {
   const { user, logout } = useContext(AuthContext);   // user.id y tipo_usuario

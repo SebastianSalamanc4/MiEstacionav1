@@ -5,7 +5,7 @@ import { AuthContext } from "../AuthContext";            // ajusta la ruta si es
 import { Pencil, Trash2 } from "lucide-react";
 import "../../CSS/GestionUsuarios.css";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 const PAGE_SIZE = 8;          // filas por página
 
 const GestionUsuarios = () => {

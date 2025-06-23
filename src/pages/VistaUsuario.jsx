@@ -10,7 +10,7 @@ const VistaUsuario = () => {
 
   useEffect(() => {
     // Llamar al endpoint de plazas para obtener el estado de todas las plazas
-    fetch('http://localhost:5000/plazas')
+    fetch('https://miestaciona-backend2.onrender.com/plazas')
       .then(response => response.json())
       .then(data => {
         const totalPlazas = data.length;

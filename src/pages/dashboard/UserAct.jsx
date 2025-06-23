@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "../../CSS/UserAct.css";
 import { Trash2 } from "lucide-react";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 const PAGE_SIZE = 8;
 
 const UserAct = () => {

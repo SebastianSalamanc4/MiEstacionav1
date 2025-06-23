@@ -5,7 +5,7 @@ import {
 } from "recharts";
 import "../../CSS/Graficos.css";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 const COLORS = ["#FF4C4C", "#4CAF50", "#007bff", "#8884d8"];
 
 const Graficos = () => {

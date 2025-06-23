@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../CSS/UserProfile.css";
 import Navbar from "./NavBar.jsx";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 
 const UserProfile = () => {
   const { user, logout } = useContext(AuthContext);   // ← tienes id y tipo_usuario

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../../CSS/RegistroAutos.css";
 
-const API = "http://localhost:5000";
+const API = "https://miestaciona-backend2.onrender.com";
 
 const RegistroAutos = () => {
   /* ------------------------- Estado principal ------------------------- */

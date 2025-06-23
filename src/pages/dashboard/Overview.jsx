@@ -23,7 +23,7 @@ const Overview = () => {
   const cargarDatos = async () => {
   try {
     setLoading(true);
-    const res = await fetch("http://localhost:5000/plazas");
+    const res = await fetch("https://miestaciona-backend2.onrender.com/plazas");
     const data = await res.json();
 
     // Construye el estado base con las plazas
@@ -34,7 +34,7 @@ const Overview = () => {
     }));
 
     // Si deseas mantener la info del historial (patente/conductor):
-    const historialRes = await fetch("http://localhost:5000/historial");
+    const historialRes = await fetch("https://miestaciona-backend2.onrender.com/historial");
     const historial    = await historialRes.json();
 
     historial.forEach(v => {
@@ -77,7 +77,7 @@ const Overview = () => {
     if (!selected) return;
     try {
       setCobrando(true);
-      const res   = await fetch(`http://localhost:5000/vehiculo/${selected.vehiculo.patente}`, {
+      const res   = await fetch(`https://miestaciona-backend2.onrender.com/vehiculo/${selected.vehiculo.patente}`, {
         method: "DELETE",
       });
       const data  = await res.json();
