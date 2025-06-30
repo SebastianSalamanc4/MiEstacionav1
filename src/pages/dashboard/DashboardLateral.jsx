@@ -74,12 +74,12 @@ const DashboardLateral = () => {
             )}
 
             {/* Cuadratura: visible solo SI es trabajador */}
-            {esTrabajador && (
+            {
               <NavLink to="/dashboard/Cuadratura" className={navClass}>
                 <MdAttachMoney className="icon-nav" />
                 Cuadratura
               </NavLink>
-            )}
+            }
           </nav>
         </div>
 

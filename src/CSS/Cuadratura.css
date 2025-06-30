@@ -1,0 +1,28 @@
+/* src/CSS/Cuadratura.css */
+
+.cuadratura-container {
+  padding: 1rem;
+}
+
+.denominaciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
+
+.denominacion label {
+  font-weight: bold;
+}
+
+.denominacion input {
+  width: 100%;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.btn-calcular {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
