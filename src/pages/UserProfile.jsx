@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../CSS/UserProfile.css";
 import Navbar from "./NavBar.jsx";
 
-const API = "https://miestaciona-backend2.onrender.com";
-
 const UserProfile = () => {
+  const { API } = useContext(AuthContext);
   const { user, logout } = useContext(AuthContext);   // ← tienes id y tipo_usuario
   const navigate         = useNavigate();
   const [loading, setLoading] = useState(true);

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
+import { AuthContext } from "../AuthContext";  
 import "../../CSS/Graficos.css";
 
-const API = "https://miestaciona-backend2.onrender.com";
 const COLORS = ["#FF4C4C", "#4CAF50", "#007bff", "#8884d8"];
 
 const Graficos = () => {
+  const { API } = useContext(AuthContext);
   const [stats, setStats] = useState(null);
   const [index, setIndex] = useState(0);
 

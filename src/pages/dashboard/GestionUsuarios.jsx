@@ -5,11 +5,11 @@ import { AuthContext } from "../AuthContext";            // ajusta la ruta si es
 import { Pencil, Trash2 } from "lucide-react";
 import "../../CSS/GestionUsuarios.css";
 
-const API = "https://miestaciona-backend2.onrender.com";
 const PAGE_SIZE = 8;          // filas por página
 
 const GestionUsuarios = () => {
   /* ----------- 🔒 Comprobación de rol ------------ */
+  const { API } = useContext(AuthContext);
   const { user } = useContext(AuthContext);
   if (user?.tipo_usuario !== "admin") {
     return <Navigate to="/dashboard" replace />;

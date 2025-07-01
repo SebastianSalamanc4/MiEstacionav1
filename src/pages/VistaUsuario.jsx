@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import "../CSS/VistaUsuario.css";
 import Navbar from "./NavBar.jsx";
+import { AuthContext } from "./AuthContext";
 
 const VistaUsuario = () => {
+  const { API } = useContext(AuthContext);
   const [capacidadTotal, setCapacidadTotal] = useState(0);
   const [ocupadas, setOcupadas] = useState(0);
   const [libres, setLibres] = useState(0);
+  const [config, setConfig] = useState({
+    nombre: "",
+    apertura: "",
+    cierre: "",
+    tarifa: ""
+  });
 
+  // Cargar plazas
   useEffect(() => {
-    // Llamar al endpoint de plazas para obtener el estado de todas las plazas
-    fetch('https://miestaciona-backend2.onrender.com/plazas')
+    fetch(`${API}/plazas`)
       .then(response => response.json())
       .then(data => {
         const totalPlazas = data.length;
@@ -24,18 +32,30 @@ const VistaUsuario = () => {
       .catch(error => console.error('Error fetching plazas:', error));
   }, []);
 
+  // Cargar configuración general (nombre, horario, tarifa)
+  useEffect(() => {
+    fetch(`${API}/configuracion`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) {
+          setConfig(data);
+        }
+      })
+      .catch(error => console.error('Error fetching config:', error));
+  }, []);
+
   return (
     <div>
-      <Navbar /> {/* Aquí agregas la navbar al inicio */}
+      <Navbar />
       <div className="container">
-        <h1>Lo Que Hacemos Mejor</h1>
-        <p>"Nuestra página web está diseñada para proporcionar toda la información clave sobre tu estacionamiento: ubicación, horarios y capacidad actual, asegurando que tanto los clientes como los administradores tengan acceso fácil y rápido a los detalles más importantes.</p>
-        
+        <h1>{config.nombre || "Estacionamiento"}</h1>
+        <p>"Nuestra página web está diseñada para proporcionar toda la información clave sobre tu estacionamiento: ubicación, horarios y capacidad actual, asegurando que tanto los clientes como los administradores tengan acceso fácil y rápido a los detalles más importantes."</p>
+
         <div className="grid">
           {/* Recuadro 1 - Ubicación */}
           <div className="card">
             <div className="icon">
-              <i className="fa fa-map-marker" aria-hidden="true"></i> {/* Ícono de ubicación */}
+              <i className="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <h2>Ubicación</h2>
             <iframe 
@@ -49,31 +69,32 @@ const VistaUsuario = () => {
             ></iframe>
           </div>
 
-          {/* Recuadro 2 - Hablar sobre la Web */}
+          {/* Recuadro 2 - Sobre la Web */}
           <div className="card">
             <div className="icon">
-              <i className="fa fa-comment" aria-hidden="true"></i> {/* Ícono de chat */}
+              <i className="fa fa-comment" aria-hidden="true"></i>
             </div>
             <h2>Hablar sobre la Web</h2>
             <p>En nuestra plataforma, puedes obtener toda la información necesaria, desde tarifas hasta horarios y disponibilidad. ¡Contáctanos si tienes preguntas!</p>
           </div>
 
-          {/* Recuadro 3 - Horarios */}
+          {/* Recuadro 3 - Horarios y tarifa */}
           <div className="card">
             <div className="icon">
-              <i className="fa fa-calendar" aria-hidden="true"></i> {/* Ícono de calendario */}
+              <i className="fa fa-calendar" aria-hidden="true"></i>
             </div>
             <h2>Horario de atención</h2>
-            <p>El estacionamiento está disponible todos los días de 8:00 AM a 10:00 PM.</p>
+            <p>Abierto desde las <strong>{config.apertura || "--:--"}</strong> hasta las <strong>{config.cierre || "--:--"}</strong>.</p>
+            <p>Precio por minuto: <strong>${config.tarifa || "--"}</strong></p>
           </div>
 
           {/* Recuadro 4 - Capacidad */}
           <div className="card">
             <div className="icon">
-              <i className="fa fa-car" aria-hidden="true"></i> {/* Ícono de auto */}
+              <i className="fa fa-car" aria-hidden="true"></i>
             </div>
             <h2>Capacidad actual</h2>
-            <p>{`El estacionamiento tiene un total de ${capacidadTotal} plazas.`}</p>
+            <p>{`Total de plazas: ${capacidadTotal}`}</p>
             <p>{`Plazas ocupadas: ${ocupadas}`}</p>
             <p>{`Plazas libres: ${libres}`}</p>
           </div>

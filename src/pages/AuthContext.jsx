@@ -1,3 +1,4 @@
+// AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
 
 // Contexto
@@ -8,7 +9,10 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null); // usuario completo
 
-  // Función login: guarda ID y tipo_usuario
+  // Constante de API
+  const API = "https://miestaciona-backend.onrender.com";
+
+  // Función login
   const login = (id, tipo_usuario) => {
     const userData = { id, tipo_usuario };
     localStorage.setItem("user", JSON.stringify(userData));
@@ -34,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout, API }}>
       {children}
     </AuthContext.Provider>
   );

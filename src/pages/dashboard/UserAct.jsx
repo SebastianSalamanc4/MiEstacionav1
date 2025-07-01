@@ -2,12 +2,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import "../../CSS/UserAct.css";
 import { Trash2 } from "lucide-react";
+import { AuthContext } from "../AuthContext";  
 
-const API = "https://miestaciona-backend2.onrender.com";
 const PAGE_SIZE = 8;
 
 const UserAct = () => {
-
+  const { API } = useContext(AuthContext);
   const [vehiculos, setVehiculos] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);

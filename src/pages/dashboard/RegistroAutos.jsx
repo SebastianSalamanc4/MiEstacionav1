@@ -1,11 +1,11 @@
 // RegistroAutos.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "../../CSS/RegistroAutos.css";
-
-const API = "https://miestaciona-backend2.onrender.com";
+import { AuthContext } from "../AuthContext";  
 
 const RegistroAutos = () => {
   /* ------------------------- Estado principal ------------------------- */
+  const { API } = useContext(AuthContext);
   const [formulario, setFormulario] = useState({
     patente: "",
     conductor: "",

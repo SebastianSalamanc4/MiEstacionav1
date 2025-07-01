@@ -6,6 +6,7 @@ import ImgLateral from "../assets/ImgLateralLogin.png";
 import Navbar from "./NavBar.jsx";
 
 const Register = () => {
+  const { API } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
@@ -31,7 +32,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://miestaciona-backend2.onrender.com/registro", {
+      const res = await fetch(`${API}/registro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

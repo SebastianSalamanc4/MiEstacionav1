@@ -6,6 +6,7 @@ import '../CSS/Login.css';
 import Navbar from "./NavBar.jsx";
 
 const Login = () => {
+  const { API } = useContext(AuthContext);
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState(null);
@@ -18,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://miestaciona-backend2.onrender.com/login', {
+      const response = await fetch(`${API}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

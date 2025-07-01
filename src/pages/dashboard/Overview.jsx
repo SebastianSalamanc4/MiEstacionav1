@@ -1,10 +1,10 @@
 // Overview.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../../CSS/Overview.css";
 import carIcon from "../../assets/icons/Iconcar.svg";
+import { AuthContext } from "../AuthContext";  
 
 const PAGE_SIZE          = 12;   // 👉 solo se muestran 12 plazas por “vista”
-const TARIFA_POR_MINUTO  = 50;   // debe coincidir con app.config["TARIFA_POR_MINUTO"]
 
 const Overview = () => {
   /* ------------------- estado principal ------------------- */
@@ -19,11 +19,12 @@ const Overview = () => {
   const [totalPagar, setTotalPagar]     = useState(null);   // null → aún no cobrado
   const [cobrando, setCobrando]         = useState(false);
 
+  const { API } = useContext(AuthContext);
   /* ------------------- cargar datos ------------------- */
   const cargarDatos = async () => {
   try {
     setLoading(true);
-    const res = await fetch("https://miestaciona-backend2.onrender.com/plazas");
+    const res = await fetch(`${API}/plazas`);
     const data = await res.json();
 
     // Construye el estado base con las plazas
@@ -34,7 +35,7 @@ const Overview = () => {
     }));
 
     // Si deseas mantener la info del historial (patente/conductor):
-    const historialRes = await fetch("https://miestaciona-backend2.onrender.com/historial");
+    const historialRes = await fetch(`${API}/historial`);
     const historial    = await historialRes.json();
 
     historial.forEach(v => {
@@ -77,7 +78,7 @@ const Overview = () => {
     if (!selected) return;
     try {
       setCobrando(true);
-      const res   = await fetch(`https://miestaciona-backend2.onrender.com/vehiculo/${selected.vehiculo.patente}`, {
+      const res   = await fetch(`${API}/vehiculo/${selected.vehiculo.patente}`, {
         method: "DELETE",
       });
       const data  = await res.json();
