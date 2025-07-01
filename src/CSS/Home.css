@@ -82,3 +82,13 @@
   height: auto;
   object-fit: contain;
 }
+.mensaje-login {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #ffe0e0;
+  border: 1px solid #ff4c4c;
+  color: #a60000;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
