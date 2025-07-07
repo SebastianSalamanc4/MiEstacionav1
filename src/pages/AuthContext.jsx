@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // usuario completo
 
   // Constante de API
-  const API = "http://127.0.0.1:5000";
+  const API = "https://miestaciona-backend.onrender.com";
 
   // Función login
   const login = (id, tipo_usuario) => {
