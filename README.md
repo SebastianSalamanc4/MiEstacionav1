@@ -1,12 +1,46 @@
-# React + Vite
+# MiEstaciona v1 – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto corresponde al **frontend** de la aplicación MiEstaciona v1, desarrollada en React con Vite. Permite gestionar un estacionamiento de forma moderna y eficiente.
 
-Currently, two official plugins are available:
+## 🚀 Cómo ingresar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Puedes acceder a la aplicación desplegada en la siguiente URL:
 
-## Expanding the ESLint configuration
+➡️ [https://mi-estacionav1.vercel.app](https://mi-estacionav1.vercel.app)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔑 Credenciales de prueba
+
+Existen tres tipos de usuarios con distintos roles y permisos. Para probar la app, puedes usar las siguientes credenciales:
+
+### Usuario común
+- **Correo:** juan@example.com
+- **Contraseña:** 1234
+
+### Trabajador
+- **Correo:** ana@example.com
+- **Contraseña:** abcd
+
+### Administrador
+- **Correo:** admin@gmail.com
+- **Contraseña:** 123
+
+## ⚙️ Funcionalidades
+
+Según el tipo de usuario, podrás:
+
+✅ Registrar e ingresar al sistema.  
+✅ Consultar disponibilidad de estacionamientos.  
+✅ Registrar vehículos y gestionar cobros (trabajador/admin).  
+✅ Visualizar gráficos estadísticos (solo admin).  
+✅ Administrar usuarios y trabajadores (solo admin).
+
+¡Explora cada vista para descubrir las funcionalidades!
+
+## 🛠️ Tecnologías usadas
+
+- React
+- Vite
+- React Router DOM
+- Chart.js
+- Lucide-React
+- CSS personalizado
