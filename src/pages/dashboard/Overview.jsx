@@ -2,86 +2,88 @@
 import React, { useEffect, useState, useContext } from "react";
 import "../../CSS/Overview.css";
 import carIcon from "../../assets/icons/Iconcar.svg";
-import { AuthContext } from "../AuthContext";  
+import { AuthContext } from "../AuthContext";
 
-const PAGE_SIZE          = 12;   // 👉 solo se muestran 12 plazas por “vista”
-
-const Overview = () => {
-  /* ------------------- estado principal ------------------- */
-  const [parkingSlots, setParkingSlots] = useState([]);
-  const [loading, setLoading]           = useState(true);
-
-  /* paginación tipo carrusel */
-  const [currentPage, setCurrentPage]   = useState(0);
-
-  /* modal de cobro */
-  const [selected, setSelected]         = useState(null);
-  const [totalPagar, setTotalPagar]     = useState(null);   // null → aún no cobrado
-  const [cobrando, setCobrando]         = useState(false);
-
-  const { API } = useContext(AuthContext);
-  /* ------------------- cargar datos ------------------- */
-  const cargarDatos = async () => {
-  try {
-    setLoading(true);
-    const res = await fetch(`${API}/plazas`);
-    const data = await res.json();
-
-    // Construye el estado base con las plazas
-    const baseSlots = data.map(p => ({
-      id: p.codigo,
-      ocupado: p.ocupado,
-      vehiculo: null  // se completará luego si está ocupado
-    }));
-
-    // Si deseas mantener la info del historial (patente/conductor):
-    const historialRes = await fetch(`${API}/historial`);
-    const historial    = await historialRes.json();
-
-    historial.forEach(v => {
-      const idx = baseSlots.findIndex(s => s.id === v.posicion);
-      const vehiculoInfo = {
-        patente:   v.patente,
-        conductor: v.conductor,
-        entrada:   v.entrada,
-      };
-      if (idx !== -1) {
-        baseSlots[idx] = { ...baseSlots[idx], vehiculo: vehiculoInfo };
-      } else {
-        baseSlots.push({ id: v.posicion, ocupado: true, vehiculo: vehiculoInfo });
-      }
-    });
-
-    setParkingSlots(baseSlots);
-    setCurrentPage(prev =>
-      prev >= Math.ceil(baseSlots.length / PAGE_SIZE) ? 0 : prev
-    );
-  } catch (err) {
-    console.error("Error al cargar plazas:", err);
-  } finally {
-    setLoading(false);
-  }
+const PAGE_SIZE = 12;
+const calcularTotalVuelto = (desglose) => {
+  return Object.entries(desglose).reduce((sum, [den, cant]) => sum + (parseInt(den) * cant), 0);
 };
 
+const Overview = () => {
+  const [parkingSlots, setParkingSlots] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const [selected, setSelected] = useState(null);
+  const [totalPagar, setTotalPagar] = useState(null);
+  const [cobrando, setCobrando] = useState(false);
+
+  const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
+  const [recibido, setRecibido] = useState(0);
+  const [vuelto, setVuelto] = useState(null);
+
+  const { API } = useContext(AuthContext);
+
+  const cargarDatos = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${API}/plazas`);
+      const data = await res.json();
+
+      const baseSlots = data.map(p => ({
+        id: p.codigo,
+        ocupado: p.ocupado,
+        vehiculo: null
+      }));
+
+      const historialRes = await fetch(`${API}/historial`);
+      const historial = await historialRes.json();
+
+      historial.forEach(v => {
+        const idx = baseSlots.findIndex(s => s.id === v.posicion);
+        const vehiculoInfo = {
+          patente: v.patente,
+          conductor: v.conductor,
+          entrada: v.entrada,
+        };
+        if (idx !== -1) {
+          baseSlots[idx] = { ...baseSlots[idx], vehiculo: vehiculoInfo };
+        } else {
+          baseSlots.push({ id: v.posicion, ocupado: true, vehiculo: vehiculoInfo });
+        }
+      });
+
+      setParkingSlots(baseSlots);
+      setCurrentPage(prev =>
+        prev >= Math.ceil(baseSlots.length / PAGE_SIZE) ? 0 : prev
+      );
+    } catch (err) {
+      console.error("Error al cargar plazas:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     cargarDatos();
   }, []);
 
-  /* ------------------- helpers de cobro ------------------- */
   const abrirCobro = slot => {
     setSelected(slot);
-    setTotalPagar(null); // aún no se cobra
+    setTotalPagar(null);
+    setMostrarEfectivo(false);
+    setRecibido(0);
+    setVuelto(null);
   };
 
   const cobrar = async () => {
     if (!selected) return;
     try {
       setCobrando(true);
-      const res   = await fetch(`${API}/vehiculo/${selected.vehiculo.patente}`, {
+      const res = await fetch(`${API}/vehiculo/${selected.vehiculo.patente}`, {
         method: "DELETE",
       });
-      const data  = await res.json();
+      const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Error de API");
       setTotalPagar(data.total_pagar);
     } catch (err) {
@@ -93,7 +95,6 @@ const Overview = () => {
   };
 
   const finalizar = () => {
-    /* libera la plaza localmente y cierra modal */
     setParkingSlots(prev =>
       prev.map(s =>
         s.id === selected.id ? { ...s, ocupado: false, vehiculo: null } : s
@@ -102,15 +103,28 @@ const Overview = () => {
     setSelected(null);
   };
 
-  /* ------------------- cálculos de UI ------------------- */
-  const pageCount      = Math.ceil(parkingSlots.length / PAGE_SIZE);
-  const sliceStart     = currentPage * PAGE_SIZE;
-  const visibleSlots   = parkingSlots.slice(sliceStart, sliceStart + PAGE_SIZE);
+  const calcularVuelto = (tarifa, recibido) => {
+    let vuelto = recibido - tarifa;
+    if (vuelto < 0) return null;
+    const denominaciones = [20000, 10000, 5000, 2000, 1000, 500, 100, 50, 10];
+    const desglose = {};
+    for (const valor of denominaciones) {
+      const cantidad = Math.floor(vuelto / valor);
+      if (cantidad > 0) {
+        desglose[valor] = cantidad;
+        vuelto -= cantidad * valor;
+      }
+    }
+    return desglose;
+  };
 
-  const usados         = parkingSlots.filter(s => s.ocupado).length;
-  const disponibles    = parkingSlots.filter(s => !s.ocupado).length;
+  const pageCount = Math.ceil(parkingSlots.length / PAGE_SIZE);
+  const sliceStart = currentPage * PAGE_SIZE;
+  const visibleSlots = parkingSlots.slice(sliceStart, sliceStart + PAGE_SIZE);
 
-  /* ------------------- render ------------------- */
+  const usados = parkingSlots.filter(s => s.ocupado).length;
+  const disponibles = parkingSlots.filter(s => !s.ocupado).length;
+
   return (
     <div className="overview-container">
       <div className="status-summary">
@@ -128,7 +142,6 @@ const Overview = () => {
         )}
       </div>
 
-      {/* ------------ carrusel ------------ */}
       <div className="carousel-nav">
         <button
           onClick={() => setCurrentPage(p => Math.max(p - 1, 0))}
@@ -147,7 +160,6 @@ const Overview = () => {
         </button>
       </div>
 
-      {/* ------------ grid de plazas ------------ */}
       <div className="parking-grid">
         {visibleSlots.map(slot => (
           <button
@@ -169,51 +181,93 @@ const Overview = () => {
         ))}
       </div>
 
-      {/* ------------ modal de cobro ------------ */}
       {selected && (
-  <div className="cobro-modal" onClick={() => setSelected(null)}>
-    <div className="cobro-card" onClick={e => e.stopPropagation()}>
-      <h3>Plaza {selected.id}</h3>
-      <p>
-        <strong>Patente:</strong> {selected.vehiculo.patente}
-        <br />
-        <strong>Conductor:</strong> {selected.vehiculo.conductor}
-      </p>
+        <div className="cobro-modal" onClick={() => setSelected(null)}>
+          <div className="cobro-card" onClick={e => e.stopPropagation()}>
+            <h3>Plaza {selected.id}</h3>
+            <p>
+              <strong>Patente:</strong> {selected.vehiculo.patente}
+              <br />
+              <strong>Conductor:</strong> {selected.vehiculo.conductor}
+            </p>
 
-      {totalPagar === null ? (
-        <>
-          <button
-            className="btn-finalizar"
-            onClick={cobrar}
-            disabled={cobrando}
-          >
-            {cobrando ? "Calculando…" : "Cobrar"}
-          </button>
+            {totalPagar === null ? (
+              <>
+                <button
+                  className="btn-transbank"
+                  onClick={() => {
+                    cobrar();
+                  }}
+                  disabled={cobrando}
+                >
+                  {cobrando ? "Calculando…" : "Cobrar Transbank"}
+                </button>
 
-          {/* Mostrar "Cancelar" solo si aún no se está cobrando */}
-          {!cobrando && (
-            <button
-              className="btn-cancelar"
-              onClick={() => setSelected(null)}
-            >
-              Cancelar
-            </button>
-          )}
-        </>
-      ) : (
-        <>
-          <p className="m-2">
-            <strong>Total a pagar:</strong> ${totalPagar}
-          </p>
-          <button className="btn-finalizar" onClick={finalizar}>
-            Finalizar
-          </button>
-        </>
+                <button
+                  className="btn-efectivo"
+                  onClick={async () => {
+                    await cobrar();
+                    setMostrarEfectivo(true);
+                  }}
+                >
+                  Cobrar efectivo
+                </button>
+
+                {!cobrando && (
+                  <button className="btn-cancelar" onClick={() => setSelected(null)}>
+                    Cancelar
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <p className="m-2">
+                  <strong>Total a pagar:</strong> ${totalPagar}
+                </p>
+                <button className="btn-finalizar" onClick={finalizar}>
+                  Finalizar
+                </button>
+              </>
+            )}
+
+            {mostrarEfectivo && (
+              <div className="efectivo-box">
+                <p><strong>Total a pagar:</strong> ${totalPagar ?? "Calculando..."}</p>
+                <input
+                  type="number"
+                  placeholder="Monto recibido"
+                  value={recibido}
+                  onChange={(e) => setRecibido(Number(e.target.value))}
+                />
+                <button className="btn-vuelto" onClick={() => {
+                  if (!totalPagar) return;
+                  const resultado = calcularVuelto(totalPagar, recibido);
+                  setVuelto(resultado);
+                }}>
+                  Calcular vuelto
+                </button>
+
+                {vuelto && (
+                  <div className="vuelto-box">
+                    <p><strong>Vuelto:</strong></p>
+                    <ul>
+                      {Object.entries(vuelto).map(([den, cant]) => (
+                        <li key={den}>${den}: {cant} unidad(es)</li>
+
+                      ))}
+                    </ul>
+                    <p><strong>Total vuelto:</strong> ${calcularTotalVuelto(vuelto)}</p>
+                  </div>
+                )}
+
+                <button className="btn-cancelar" onClick={() => setMostrarEfectivo(false)}>
+                  Cerrar
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       )}
-    </div>
-  </div>
-)}
-
     </div>
   );
 };

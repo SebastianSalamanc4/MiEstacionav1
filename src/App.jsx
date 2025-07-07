@@ -9,7 +9,9 @@ import Overview from "./pages/dashboard/Overview";
 import RegistroAutos from "./pages/dashboard/RegistroAutos";
 import UserAct from "./pages/dashboard/UserAct";
 import Graficos from "./pages/dashboard/Graficos";
-import { Cuadratura } from "./pages/dashboard/Cuadratura";
+
+import Cuadratura from "./pages/dashboard/Cuadratura";
+
 import { GestionUsuarios } from "./pages/dashboard/GestionUsuarios";
 import { Profile } from "./pages/dashboard/Profile";
 import Configuracion from "./pages/dashboard/Configuracion";

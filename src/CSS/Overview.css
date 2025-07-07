@@ -161,3 +161,37 @@
 .btn-cancelar:hover {
   background: #bbbbbb;
 }
+.btn-transbank,
+.btn-efectivo {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #257cff;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-transbank:hover,
+.btn-efectivo:hover {
+  background: #1a5ed6;
+}
+.btn-vuelto {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #257cff;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-vuelto:hover {
+  background: #1a5ed6;
+}
