@@ -1,0 +1,28 @@
+.cuadratura-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.denominaciones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.den-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mensaje-ok {
+  color: green;
+}
+
+.mensaje-error {
+  color: red;
+}
